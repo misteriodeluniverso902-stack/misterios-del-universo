@@ -1,0 +1,413 @@
+html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curiosidades del Universo</title>
+    <style>
+        /* CSS3 - Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #000428, #004e92);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        header h1 {
+            position: relative;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            animation: tituloFlotante 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes tituloFlotante {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        
+        nav a:hover {
+            color: #4fc3f7;
+            background-color: rgba(79, 195, 247, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #4fc3f7;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 2px solid #4fc3f7;
+            padding-bottom: 0.5rem;
+        }
+        
+        .curiosidad {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .curiosidad:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .curiosidad-texto {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+        }
+        
+        .curiosidad-imagen {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .curiosidad-imagen img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        
+        .curiosidad-imagen img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(79, 195, 247, 0.4);
+        }
+        
+        .animacion-estrella {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px white;
+            animation: brillo 2s infinite alternate;
+        }
+        
+        @keyframes brillo {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        footer {
+            background: linear-gradient(to right, #000428, #004e92);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .galeria-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 200px;
+        }
+        
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .galeria-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .galeria-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .galeria-item:hover::after {
+            opacity: 1;
+        }
+        
+        .galeria-titulo {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            color: white;
+            z-index: 2;
+            transition: bottom 0.3s;
+        }
+        
+        .galeria-item:hover .galeria-titulo {
+            bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .curiosidad, .curiosidad:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Curiosidades del Universo</h1>
+        <p>Explorando los misterios del cosmos</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#estrellas">Estrellas</a></li>
+            <li><a href="#planetas">Planetas</a></li>
+            <li><a href="#galaxias">Galaxias</a></li>
+            <li><a href="#agujeros">Agujeros Negros</a></li>
+            <li><a href="#galeria">Galería</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="estrellas">
+            <h2>Estrellas Fascinantes</h2>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>El Sol no es amarillo</h3>
+                    <p>Aunque lo percibamos amarillo desde la Tierra, el Sol es en realidad una estrella blanca. Nuestra atmósfera dispersa la luz azul, haciendo que parezca amarilla. Si estuvieras en el espacio, verías que el Sol es blanco.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1614642264762-d0a3b8bf3700?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="El Sol desde el espacio">
+                    <div class="animacion-estrella" style="top: 20%; left: 15%;"></div>
+                    <div class="animacion-estrella" style="top: 70%; left: 80%; animation-delay: 0.5s;"></div>
+                </div>
+            </div>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>Estrellas de neutrones</h3>
+                    <p>Las estrellas de neutrones son tan densas que una cucharadita de su material pesaría miles de millones de toneladas en la Tierra. Giran extremadamente rápido, algunas hasta cientos de veces por segundo.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Estrella de neutrones">
+                    <div class="animacion-estrella" style="top: 30%; left: 70%; animation-delay: 0.3s;"></div>
+                    <div class="animacion-estrella" style="top: 60%; left: 30%; animation-delay: 0.7s;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="planetas">
+            <h2>Planetas Extraordinarios</h2>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>Júpiter: El gigante protector</h3>
+                    <p>Júpiter actúa como un escudo cósmico para la Tierra, atrayendo cometas y asteroides con su poderosa gravedad. Sin Júpiter, la Tierra sería impactada por objetos peligrosos con mucha más frecuencia.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1614314107768-9c8ae5d8271e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Planeta Júpiter">
+                    <div class="animacion-estrella" style="top: 15%; left: 85%;"></div>
+                </div>
+            </div>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>HD 189733b: El planeta de lluvia de vidrio</h3>
+                    <p>Este exoplaneta azul cobalto tiene vientos supersónicos de hasta 8,700 km/h y llueve vidrio líquido de lado debido a las temperaturas extremas de más de 1,000°C.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Planeta extrasolar">
+                    <div class="animacion-estrella" style="top: 80%; left: 20%; animation-delay: 0.4s;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="galaxias">
+            <h2>Galaxias Asombrosas</h2>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>La Vía Láctea en movimiento</h3>
+                    <p>Nuestra galaxia, la Vía Láctea, se mueve por el universo a aproximadamente 600 km/s. Además, está en curso de colisión con la galaxia de Andrómeda, aunque esto no ocurrirá hasta dentro de unos 4 mil millones de años.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vía Láctea">
+                    <div class="animacion-estrella" style="top: 40%; left: 60%; animation-delay: 0.2s;"></div>
+                    <div class="animacion-estrella" style="top: 70%; left: 30%; animation-delay: 0.6s;"></div>
+                </div>
+            </div>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>Galaxias caníbales</h3>
+                    <p>Las galaxias grandes a menudo "devoran" a las más pequeñas. La Vía Láctea actualmente está absorbiendo varias galaxias enanas, y en el pasado ya ha absorbido otras, dejando rastros de estrellas como evidencia.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1462332420958-ab05b6c45319?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Colisión de galaxias">
+                    <div class="animacion-estrella" style="top: 25%; left: 75%;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="agujeros">
+            <h2>Agujeros Negros Misteriosos</h2>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>El tiempo cerca de un agujero negro</h3>
+                    <p>La gravedad extrema de un agujero negro distorsiona el tiempo. Para un observador lejano, el tiempo cerca del horizonte de eventos parece transcurrir más lentamente. Una hora cerca de un agujero negro podrían ser años en la Tierra.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agujero negro">
+                    <div class="animacion-estrella" style="top: 50%; left: 50%;"></div>
+                </div>
+            </div>
+            
+            <div class="curiosidad">
+                <div class="curiosidad-texto">
+                    <h3>El agujero negro más grande conocido</h3>
+                    <p>TON 618 es un agujero negro ultramasivo con una masa estimada de 66 mil millones de veces la del Sol. Su horizonte de eventos tendría un diámetro mayor que todo nuestro sistema solar.</p>
+                </div>
+                <div class="curiosidad-imagen">
+                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agujero negro supermasivo">
+                    <div class="animacion-estrella" style="top: 30%; left: 20%; animation-delay: 0.3s;"></div>
+                    <div class="animacion-estrella" style="top: 80%; left: 70%; animation-delay: 0.7s;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="galeria">
+            <h2>Galería del Universo</h2>
+            
+            <div class="galeria">
+                <div class="galeria-item">
+                    <img src="https://images.unsplash.com/photo-1462332420958-ab05b6c45319?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nebulosa">
+                    <div class="galeria-titulo">Nebulosa del Águila</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://images.unsplash.com/photo-1501862700950-18382cd41497?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Saturno">
+                    <div class="galeria-titulo">Saturno y sus anillos</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://images.unsplash.com/photo-1457365050282-c53f772f053c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vía Láctea">
+                    <div class="galeria-titulo">Vía Láctea desde la Tierra</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Galaxia">
+                    <div class="galeria-titulo">Galaxia espiral</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://images.unsplash.com/photo-1501862700950-18382cd41497?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Eclipse solar">
+                    <div class="galeria-titulo">Eclipse solar total</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Supernova">
+                    <div class="galeria-titulo">Restos de supernova</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2023 Curiosidades del Universo | Todos los derechos reservados</p>
+        <p>Diseñado con HTML5 y CSS3</p>
+    </footer>
+</body>
+</html>
